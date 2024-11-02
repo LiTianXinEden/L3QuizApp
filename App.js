@@ -23,8 +23,8 @@ const Questions = ({qn, picture, onValueChange, options}) => {
                 items = {options}
             />
         </View>
-    )
-}
+    );
+};
 
 const App = () => {
     const [ans1, setAns1] = useState();
