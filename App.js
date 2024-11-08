@@ -5,21 +5,72 @@ import Icon from "react-native-vector-icons/FontAwesome6";
 
 
 const styles = StyleSheet.create({
-    row: {
+    title: {
         flexDirection: 'row',
         marginTop: 5,
-        gap: 10
-    }
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderColor: 'black',
+        borderBottomWidth: 2,
+        marginBottom: 5,
+        alignSelf: 'center'
+
+    },
+
+    parent: {
+        backgroundColor: "#41547f",
+        marginLeft: 5,
+        marginRight: 5,
+        alignItems: 'center',
+        borderWidth: 2,
+        borderRadius: 5,
+        marginTop: 10,
+        marginBottom: 10,
+    },
+
+    name: {
+        fontSize: 25,
+        fontWeight: 'bold',
+        fontStyle: 'italic',
+        marginLeft: 8,
+        color: "#2c2481",
+    },
+
+    question: {
+        paddingLeft: 5,
+        paddingTop: 5,
+        paddingBottom: 5,
+        fontSize: 20,
+        color: '#ffffff',
+        fontWeight: 'bold',
+    },
+
+    image: {
+        width: 400,
+        height: 400,
+    },
+
+    button:{
+        alignItems: 'center',
+        backgroundColor: '#795ec5',
+        alignSelf: 'center',
+        justifyContent: 'space-around',
+        padding: 10,
+        paddingLeft: 15,
+        paddingRight: 15,
+        borderRadius: 5,
+
+    },
 
 });
 
 const Questions = ({qn, picture, onValueChange, options}) => {
     return(
-        <View style={{backgroundColor: "#41547f"}}>
-            <Text style={{color: "#ffffff", fontSize: 20, paddingBottom: 5}}>{qn}</Text>
-            <Image source={picture} style={{width: 500, height: 400}}></Image>
+        <View style={[styles.parent]}>
+            <Text style={[styles.question]}>{qn}</Text>
+            <Image source={picture} style={[styles.image]}></Image>
             <RNPickerSelect
-                onValueChange={onValueChange}
+                onValueChange={(value) => onValueChange(value)}
                 items = {options}
             />
         </View>
@@ -44,21 +95,17 @@ const App = () => {
         if (ans2 === correctAns.qn2) points += 1;
         if (ans3 === correctAns.qn3) points += 1;
 
-        Alert.alert(`you got ${points} out of 4 correct!`)
+        Alert.alert(`you got ${points} out of 3 correct!`)
     }
-
-
 
 
     return (
         <ScrollView contentContainerStyle={{}}>
             <Text></Text>
             <Text></Text>
-            <View style={styles.row}>
-                <Icon name="gamepad" size={20} color="#2c2481" />
-                <Text style={{ fontSize: 24, fontWeight: 'bold', fontStyle: 'italic', marginBottom: 20, color:"#2c2481" }}>
-                    Hollow Knight Quiz
-                </Text>
+            <View style={styles.title}>
+                <Icon name="gamepad" size={20} color="#2c2481"/>
+                <Text style={[styles.name]}>Hollow Knight Quiz</Text>
             </View>
 
 
@@ -89,7 +136,9 @@ const App = () => {
                        ]}
             />
 
-            <Button title="Submit Answers" color="#c5a9f8" onPress={handleSubmit}/>
+            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+                <Text>Submit Answers</Text>
+            </TouchableOpacity>
             <Text></Text>
             <Text></Text>
 
